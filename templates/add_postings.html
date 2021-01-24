@@ -1,8 +1,27 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Post
+Post
 {% endblock %}
 
 {% block main %}
+    <h3>Register as an Employee</h3>
+    <form action="/register_as_employer" method="post">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="job_name" placeholder="Job Name" type="text" />
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" name="location" placeholder="New York, NY 10118" type="text" />
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" name="max_distance" placeholder="In Miles" type="number" />
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" name="skills" placeholder="Skills" type="text" />
+        </div>
+        <div class="form-group">
+            <textarea autocomplete="off" class="form-control" name="job_description"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
 {% endblock %}

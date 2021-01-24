@@ -7,21 +7,59 @@
 {% block main %}
     <h3>Register as an Employee</h3>
     <form action="/register_as_employer" method="post">
+
+        <label for="first_name" class="form-label">First Name</label>
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="first_name" placeholder="Jane" type="text"/>
-        </div>
+            <input autocomplete="off" autofocus id="first_name" class="form-control" name="first_name" placeholder="Jane" type="text"/>
+        </div><br>
+
+        <label for="last_name" class="form-label">Last Name</label>
         <div class="form-group">
-            <input class="form-control" name="last_name" placeholder="Doe" type="text"/>
-        </div>
+            <input class="form-control" id="last_name" name="last_name" placeholder="Doe" type="text"/>
+        </div><br>
+
+        <label for="email" class="form-label">Email</label>
         <div class="form-group">
-            <input class="form-control" name="email" placeholder="Email" type="email"/>
-        </div>
+            <input class="form-control" id="email" name="email" placeholder="Email" type="email"/>
+        </div><br>
+
+        <label for="address" class="form-label">Address</label>
         <div class="form-group">
-            <input class="form-control" name="password" placeholder="Password" type="password"/>
-        </div>
+            <input class="form-control" id="address" name="address" placeholder="Address" type="text"/>
+        </div><br>
+
+        <label for="highest_education" class="form-label">First Name</label>
+        <select class="form-select" id="highest_education" aria-label="Default select example" name="highest_education">
+            <option selected value="High school or equivalent">High school or equivalent</option>
+            <option value="Technical or occupational certificate">Technical or occupational certificate</option>
+            <option value="Associate degree">Associate degree</option>
+            <option value="Some college coursework completed">Some college coursework completed</option>
+            <option value="Bachelor’s degree">Bachelor’s degree</option>
+            <option value="Master’s degree">Master’s degree</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Professional">Professional</option>
+        </select><br>
+
+        <label for="skills" class="form-label">Skills</label>
         <div class="form-group">
-            <input class="form-control" name="confirmation" placeholder="Confirm Password" type="password"/>
-        </div>
+            <textarea autocomplete="off" id="skills" class="form-control" name="skills"></textarea>
+        </div><br>
+
+        <label for="resume" class="form-label">Resume</label>
+        <div class="form-group">
+            <textarea autocomplete="off" id="resume" class="form-control" name="resume"></textarea>
+        </div><br>
+
+        <label for="password" class="form-label">Password</label>
+        <div class="form-group">
+            <input class="form-control" id="password" name="password" placeholder="Password" type="password"/>
+        </div><br>
+
+        <label for="confirmation" class="form-label">Confirm Password</label>
+        <div class="form-group">
+            <input class="form-control" id="confirmation" name="confirmation" placeholder="Confirm Password" type="password"/>
+        </div><br>
+
         <button class="btn btn-primary" type="submit">Register</button>
     </form>
 {% endblock %}

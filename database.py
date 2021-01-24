@@ -38,8 +38,7 @@ curr.execute(
 # Creates the employee profile
 curr.execute(
     """CREATE TABLE IF NOT EXISTS profile (
-        profile_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        user_id INTEGER NOT NULL UNIQUE,
+        user_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         location INTEGER NOT NULL,
         skills TEXT NOT NULL,
         highest_education TEXT NOT NULL,

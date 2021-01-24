@@ -75,6 +75,7 @@ def register_as_employer():
             with sqlite3.connect("employment.db") as conn:
                 cursor = conn.cursor()
                 new_user_id = cursor.execute("INSERT INTO users (first_name, last_name, email, hash, user_type, company) VALUES (?, ?, ?, ?, ?, ?)", (first_name, last_name, email, hash, user_type, company))
+                conn.commit()
         except sqlite3.IntegrityError:
             return render_template("error.html", error="Account already exists.", code=400)
 
@@ -103,6 +104,18 @@ def register_as_employee():
         elif not request.form.get("email"):
             return render_template("error.html", error="Please enter your email.", code=400)
 
+        elif not request.form.get("address"):
+            return render_template("error.html", error="Please enter your address.", code=400)
+
+        elif not request.form.get("skills"):
+            return render_template("error.html", error="Please enter your skills.", code=400)
+
+        elif not request.form.get("highest_education"):
+            return render_template("error.html", error="Please enter your skills.", code=400)
+
+        elif not request.form.get("resume"):
+            return render_template("error.html", error="Please enter your resume in plain text.", code=400)
+
         elif not request.form.get("password"):
             return render_template("error.html", error="Please enter your password.", code=400)
 
@@ -114,11 +127,20 @@ def register_as_employee():
         user_type = "employee"
         email = request.form.get("email")
         hash = generate_password_hash(request.form.get("password"))
+        location = request.form.get("address")
+        skills = request.form.get("skills")
+        highest_education = request.form.get("highest_education")
+        resume = request.form.get("resume")
 
         try:
             with sqlite3.connect("employment.db") as conn:
                 cursor = conn.cursor()
-                new_user_id = cursor.execute("INSERT INTO users (first_name, last_name, email, hash, user_type) VALUES (?, ?, ?, ?, ?)", (first_name, last_name, email, hash, user_type))
+                cursor.execute("SELECT email FROM users WHERE email=?", (email,))
+                results = cursor.fetchone()
+                if len(results) == 1:
+                    raise sqlite3.IntegrityError
+                cursor.execute("INSERT INTO users (first_name, last_name, email, hash, user_type) VALUES (?, ?, ?, ?, ?)", (first_name, last_name, email, hash, user_type))
+                conn.commit()
         except sqlite3.IntegrityError:
             return render_template("error.html", error="Account already exists.", code=400)
 
@@ -127,6 +149,9 @@ def register_as_employee():
             cursor.execute("SELECT user_id FROM users WHERE email=?", email)
             session["user_id"] = cursor.fetchone()
             session["user_type"] = user_type
+
+            cursor.execute("INSERT INTO profile VALUES (?, ?, ?, ?, ?)", (session["user_id"], location, skills, highest_education, resume))
+            conn.commit()
         
         return redirect(url_for("portal"))
 
@@ -179,7 +204,7 @@ def portal():
         # Get all potential employees list
         with sqlite3.connect("employment.db") as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM users WHERE user_type=employee")
+            cursor.execute("SELECT * FROM users WHERE user_type='employee'")
             potential_employees_list = cursor.fetchall()
         
         # Get all postings created by the user
@@ -197,6 +222,7 @@ def portal():
         return render_template("employer_portal.html", matches=matches)
 
     else:
+        # TODO Show user profile
         return render_template("employee_portal.html")
 
 
