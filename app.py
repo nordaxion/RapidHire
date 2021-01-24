@@ -315,3 +315,8 @@ def logout():
 
     # Redirect user to root
     return redirect("/")
+
+
+@app.route("/about_us")
+def about_us():
+    return render_template("aboutus.html")
