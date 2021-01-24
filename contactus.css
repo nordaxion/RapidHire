@@ -39,3 +39,6 @@ button{
   top: 0;
   opacity: 0;
 }
+.form-control{
+    min-width;"200%;
+}
