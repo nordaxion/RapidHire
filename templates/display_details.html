@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Portal
+{% endblock %}
+
+{% block main %}
+    <h3>Details</h3><br>
+    <div class="list-group">
+        {% if session.user_type == "employer" %}
+            {% if match_len != 0 %}
+                {% for match in matches %}
+                    <div class=row>
+                        <h5>{{ matches[0]}} {{ matches[1] }}</h5>
+                        <p>{{ matches[2] }} </p>
+                        <p>Email: {{ matches[3] }}</p>
+                        <p>Skills: {{ matches[4] }}</p>
+                        <p>Highest Form of Education: {{ matches[5] }}</p>
+                        <p>Resume: {{ matches [6] }}</p>
+                        <br>
+                    </div>
+                {% endfor %}
+            {% else %}
+            <h6>There are no matches.</h6>
+            {% endif %}
+
+        {% else %}
+            <div class="row">
+                <h5>{{ post[0] }}</h5>
+                <p>{{ post[1] }}</p>
+                <p>Located at {{ post[2] }}</p>
+                <p>Skills Required: 
+                    {{ post[3] }}
+                </p>
+                <p>Job Description: 
+                    {{ post[4] }}
+                </p>
+                <br>
+            </div>
+        {% endif %}
+
+
+
+        {% for post in postings %}
+        <a href="/portal/{{ post[0] }}" class="list-group-item list-group-item-action">{{ post[1] }}</a>
+        {% endfor %}
+      </div>
+{% endblock %}

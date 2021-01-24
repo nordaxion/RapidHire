@@ -5,5 +5,18 @@
 {% endblock %}
 
 {% block main %}
+    <form action="/add_postings" method="post">
 
+        <label for="job_name" class="form-label">Job Name</label>
+        <div class="form-group">
+            <input autocomplete="off" autofocus id="job_name" class="form-control" name="job_name" type="text"/>
+        </div><br>
+
+        <label for="location" class="form-label">Location</label>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" id="location" name="location" placeholder="Password" type="password"/>
+        </div><br>
+        
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
 {% endblock %}

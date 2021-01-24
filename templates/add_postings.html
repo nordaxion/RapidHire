@@ -5,8 +5,8 @@ Post
 {% endblock %}
 
 {% block main %}
-    <h3>Register as an Employee</h3>
-    <form action="/register_as_employer" method="post">
+    <h3>Post a job opening</h3>
+    <form action="/add_postings" method="post">
         <div class="form-group">
             <input autocomplete="off" autofocus class="form-control" name="job_name" placeholder="Job Name" type="text" />
         </div>
@@ -22,6 +22,6 @@ Post
         <div class="form-group">
             <textarea autocomplete="off" class="form-control" name="job_description"></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Register</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 {% endblock %}

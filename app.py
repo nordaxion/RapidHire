@@ -27,6 +27,7 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+
 # Configure session to use filesystem (instead of signed cookes)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
@@ -63,7 +64,7 @@ def register_as_employer():
 
         elif not request.form.get("password") == request.form.get("confirmation"):
             return render_template("error.html", error="Passwords do not match.", code=400)
-        
+
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
         company = request.form.get("company")
@@ -74,7 +75,13 @@ def register_as_employer():
         try:
             with sqlite3.connect("employment.db") as conn:
                 cursor = conn.cursor()
-                new_user_id = cursor.execute("INSERT INTO users (first_name, last_name, email, hash, user_type, company) VALUES (?, ?, ?, ?, ?, ?)", (first_name, last_name, email, hash, user_type, company))
+                cursor.execute(
+                    "SELECT email FROM users WHERE email=?", (email,))
+                results = cursor.fetchone()
+                if results:
+                    raise sqlite3.IntegrityError
+                cursor.execute("INSERT INTO users (first_name, last_name, email, hash, user_type, company) VALUES (?, ?, ?, ?, ?, ?)", (
+                    first_name, last_name, email, hash, user_type, company))
                 conn.commit()
         except sqlite3.IntegrityError:
             return render_template("error.html", error="Account already exists.", code=400)
@@ -121,7 +128,7 @@ def register_as_employee():
 
         elif not request.form.get("password") == request.form.get("confirmation"):
             return render_template("error.html", error="Passwords do not match.", code=400)
-        
+
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
         user_type = "employee"
@@ -135,9 +142,10 @@ def register_as_employee():
         try:
             with sqlite3.connect("employment.db") as conn:
                 cursor = conn.cursor()
-                cursor.execute("SELECT email FROM users WHERE email=?", (email,))
+                cursor.execute(
+                    "SELECT email FROM users WHERE email=?", (email,))
                 results = cursor.fetchone()
-                if len(results) == 1:
+                if results:
                     raise sqlite3.IntegrityError
                 cursor.execute("INSERT INTO users (first_name, last_name, email, hash, user_type) VALUES (?, ?, ?, ?, ?)", (first_name, last_name, email, hash, user_type))
                 conn.commit()
@@ -146,13 +154,13 @@ def register_as_employee():
 
         with sqlite3.connect("employment.db") as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT user_id FROM users WHERE email=?", email)
+            cursor.execute("SELECT user_id FROM users WHERE email=?", (email,))
             session["user_id"] = cursor.fetchone()
             session["user_type"] = user_type
 
-            cursor.execute("INSERT INTO profile VALUES (?, ?, ?, ?, ?)", (session["user_id"], location, skills, highest_education, resume))
+            cursor.execute("INSERT INTO profile VALUES (?, ?, ?, ?, ?)", (int(session["user_id"]), location, skills, highest_education, resume))
             conn.commit()
-        
+
         return redirect(url_for("portal"))
 
     else:
@@ -162,36 +170,38 @@ def register_as_employee():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Shows the login page"""
-    
+
     session.clear()
 
     if request.method == "POST":
         if not request.form.get("email"):
             return render_template("error.html", error="Please enter your email.", code=400)
-        
+
         elif not request.form.get("password"):
             return render_template("error.html", error="Please enter your password.", code=400)
 
         # Query database for email
         with sqlite3.connect("employment.db") as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM users WHERE email=?", request.form.get("email"))
+            cursor.execute("SELECT * FROM users WHERE email=?",
+                           (request.form.get("email"),))
             rows = cursor.fetchall()
+            print(rows)
 
         # Ensure username exist and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if len(rows) != 1 or not check_password_hash(rows[0][4], request.form.get("password")):
             return render_template("error.html", error="Invalid username and/or password.", code=400)
 
         # Remember which user is logged in
-        session["user_id"] = rows[0]["user_id"]
-        session["user_type"] = rows[0]["user_type"]
+        session["user_id"] = int(rows[0][0])
+        session["user_type"] = rows[0][5]
 
         # Redirect the user to the portal
-        return redirect(url_for(portal))
-        
+        return redirect("/portal")
+
     else:
         return render_template("login.html")
-    
+
 
 @app.route("/portal")
 @login_required
@@ -200,30 +210,58 @@ def portal():
 
     # Checks which user_type the user is
     if session["user_type"] == "employer":
-        
-        # Get all potential employees list
-        with sqlite3.connect("employment.db") as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM users WHERE user_type='employee'")
-            potential_employees_list = cursor.fetchall()
-        
+
         # Get all postings created by the user
         with sqlite3.connect("employment.db") as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM postings WHERE user_id=?", session["user_id"])
-            user_postings = cursor.fetchall()
+            cursor.execute("SELECT * FROM postings")
+            temp = cursor.fetchone()
 
-        # Filter distance to get matches
-        matches = {}
-        for posting in user_postings:
-            possible_matches = filter_distance(posting[2], potential_employees_list, distance=posting[3])
-            matches[posting] = possible_matches
+            if temp:
+                cursor.execute("SELECT * FROM postings WHERE user_id=?", (session["user_id"],))
+                user_postings = cursor.fetchall()
+            else:
+                user_postings = []
 
-        return render_template("employer_portal.html", matches=matches)
+        # Display all user postings
+
+        return render_template("employer_portal.html", posts=user_postings)
 
     else:
-        # TODO Show user profile
-        return render_template("employee_portal.html")
+        with sqlite3.connect("employment.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT job_name, company, location, skills, job_description, posting_id FROM postings INNER JOIN users ON postings.user_id = users.user_id")
+            posts = cursor.fetchall()
+        return render_template("employee_portal.html", posts=posts)
+
+
+@app.route("/portal/<int:id>")
+@login_required
+def show_details(id):
+    if session["user_type"] == "employer":
+
+        # Get all potential employees list
+        with sqlite3.connect("employment.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT location, max_distance FROM postings WHERE posting_id=?", (id,))
+            posting_location, max_distance = cursor.fetchone()
+
+            cursor.execute("SELECT first_name, last_name, location, email, skills, highest_education, resume FROM users INNER JOIN profile ON users.user_id=profile.user_id WHERE user_type='employee'")
+            potential_employees_list = cursor.fetchall()
+
+        matches = filter_distance(
+            posting_location, potential_employees_list, distance=max_distance)
+
+        return render_template("display_details.html", matches=matches, match_len=len(matches))
+
+    else:
+        with sqlite3.connect("employment.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT job_name, company, location, skills, job_description FROM postings INNER JOIN users ON users.user_id = postings.user_id WHERE posting_id=?", (id,))
+            post = cursor.fetchone()
+        return render_template("display_details.html", post=post)
 
 
 @app.route("/add_postings", methods=["GET", "POST"])
@@ -252,8 +290,14 @@ def add_postings():
         max_distance = request.form.get("max_distance")
         skills = request.form.get("skills")
         job_description = request.form.get("job_description")
+        user_id = int(session["user_id"])
 
-        cursor.execute("INSERT INTO postings (job_name, location, max_distance, skill, user_id, job_description) VALUES (?, ?, ?, ?, ?, ?)", (job_name, location, max_distance, skill, user_id, job_description))
+        with sqlite3.connect("employment.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO postings (job_name, location, max_distance, skills, user_id, job_description) VALUES (?, ?, ?, ?, ?, ?)", (job_name, location, max_distance, skills, user_id, job_description))
+            conn.commit()
+
+        return redirect("/portal")
 
     else:
         return render_template("add_postings.html")
@@ -266,6 +310,5 @@ def logout():
     # Forget any user_id
     session.clear()
 
-    # Redirect user to login form
-    return redirect(url_for("index"))
-
+    # Redirect user to root
+    return redirect("/")

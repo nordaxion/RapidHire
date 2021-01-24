@@ -49,11 +49,11 @@
                 <div class="navbar-nav">
                     <a class="nav-link active" href="#">What is Rapid Hire?</a>
                     {% if session.user_id %}
-                        <a class="nav-link active" href="#">Portal</a>
+                        <a class="nav-link active" href="/portal">Portal</a>
                         {% if session.user_type == "employer" %}
-                        <a class="nav-link active" href="#">Post a Job Opening</a>
+                        <a class="nav-link active" href="/add_postings">Post a Job Opening</a>
                         {% endif %}
-                        <a class="nav-link active" href="#">Sign Out</a>
+                        <a class="nav-link active" href="/logout">Sign Out</a>
                     {% else %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -65,12 +65,23 @@
                                 <li><a class="dropdown-item" href="/register_as_employee">Looking for a job</a></li>
                             </ul>
                         </li>
-                        <a class="nav-link active" href="#">Login</a>
+                        <a class="nav-link active" href="/login">Login</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
+    <!-- <div class="logo" class="elements">
+        <img src="logo.gif" atl="logo" class="logo">
+    </div> -->
+    <!--Menu Mavigation Bar -->
+    <!-- <div class="topnav">
+        <a href="#Home">Home</a>
+        <a href="#About">What is Rapid Hire?</a>
+        <a href="#Service">Business Application</a>
+        <a href="application.html">Job Application</a>
+        <button>Login</button>
+    </div> -->
 
     <main class="container p-5">
         {% block main %}{% endblock %}

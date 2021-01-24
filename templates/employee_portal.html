@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Portal
+{% endblock %}
+
+{% block main %}
+    <h3>User Posts</h3><br>
+    <div class="list-group">
+        {% for post in posts %}
+        <a href="/portal/{{ post[5] }}" class="list-group-item list-group-item-action">{{ post[0] }}</a>
+        {% endfor %}
+      </div>
+{% endblock %}
