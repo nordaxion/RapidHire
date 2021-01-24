@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-site-verification" content="snA7C_3rIRtbTcg4ylbz0rNW84SKiKp-ykZbKoUq-jU" />
+    <title> Application Form </title>
+    <script src="/js/jquery.min.js" type="application/javascript"></script>
+    <script src="/js/jquery-ui.min.js" type="application/javascript"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <link ref="stylesheet" href="style.css">
+    <link href="/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css" />
+    <script src="/js/jquery.signature.js" type="application/javascript"></script>
+    <link href="/css/jquery.signature.css" rel="stylesheet" type="text/css" />
+    <script src="/js/jquery.ui.touch-punch.min.js" type="application/javascript"></script>
+
+    <link href="/css/site.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        function signaturejsLoad() {
+            jQuery('#defaultSignature').signature({ syncField: '#signatureJSON' });
+            jQuery('#clearSignatureButton').click(function () {
+                jQuery('#defaultSignature').signature('clear');
+            });
+        }
+    </script>
+</head>
+
+<body style="background-color:#3c53ad">
+    <div style="margin: auto; max-width: 715px; padding: 5px">
+        <br>
+        <form action="/action_page.php" method="post">
+            <div style="max-width: 400px;">
+            </div>
+            <div style="padding-bottom: 18px; text-align:center; font-size : 44px;">Job Application</div>
+            <div style="padding-bottom: 15px;font-size : 20px;">Contact Information</div>
+            <div style="display: flex; padding-bottom: 18px; max-width:450px;">
+                <div style=" margin-left:0; margin-right:1%; width:49%;">First name:<span style="color: red;">
+                        *</span><br />
+                    <input type="text" id="data_3" name="data_3" style="max-width: 100%;" class="form-control"
+                        required />
+                </div>
+                <div style=" margin-left: 1%; margin-right: 0; width: 49%;">Last name:<span style="color: red;">
+                        *</span><br />
+                    <input type="text" id="data_4" name="data_4" style="max-width: 100%;" class="form-control"
+                        required />
+                </div>
+            </div>
+            <div style="padding-bottom: 18px;">Email<span style="color: red;"> *</span><br />
+                <input type="text" id="data_5" name="data_5" style="max-width : 450px;" class="form-control" required />
+            </div>
+            <div style="padding-bottom: 18px;">Phone<span style="color: red;"> *</span><br />
+                <input type="text" id="data_6" name="data_6" style="max-width : 450px;" class="form-control" required />
+            </div>
+            <div style="padding-bottom: 18px;">Position interested in<span style="color: red;"> *</span><br />
+                <input type="text" id="data_9" name="data_9" style="max-width : 450px;" class="form-control" required />
+            </div>
+            <div style="padding-bottom: 18px;">Resume upload <span style="color: red;">
+                    *</span><br />
+                <input id="data_10" name="data_10" style="max-width : 450px;" type="file" class="form-control"
+                    required />
+            </div>
+            <div style="padding-bottom: 18px;">Salary requirements?<br />
+                <input type="text" id="data_12" name="data_12" style="max-width : 450px;" class="form-control" />
+            </div>
+            <div style="padding-bottom: 18px;">When can you start?<br />
+                <input type="text" id="data_13" name="data_13" style="max-width : 450px;" class="form-control" />
+            </div>
+
+            <div style="padding-bottom: 18px;">Are you willing to relocate?<br />
+                <span><input type="radio" id="data_14_0" name="data_14" value="Yes" /> Yes</span><br />
+                <span><input type="radio" id="data_14_1" name="data_14" value="No" /> No</span><br />
+                <span><input type="radio" id="data_14_2" name="data_14" value="Not sure" /> Not sure</span><br />
+            </div>
+            <div style="padding-bottom: 18px;">Are you out of work due to Covid-19?<br />
+                <span><input type="radio" id="data_14_0" name="data_14" value="Yes" /> Yes</span><br />
+                <span><input type="radio" id="data_14_1" name="data_14" value="No" /> No</span><br />
+                <br />
+            </div>
+            <div style="padding-bottom: 18px;">Last position you worked for<br />
+                <input type="text" id="data_15" name="data_15" style="max-width : 450px;" class="form-control" />
+            </div>
+            <div style="padding-bottom: 18px;">Comment for potential employers.<br />
+                <textarea id="data_16" false name="data_16" style="max-width : 450px;" rows="6"
+                    class="form-control"></textarea>
+            </div>
+            <div style="padding-bottom: 18px;"><input name="skip_Submit" value="Submit" type="submit" /></div>
+        </form>
+    </div>
+</body>
+
+
+</html>

@@ -1,10 +1,10 @@
 * {
     box-sizing: border-box !important;
     transition: ease all 0.5s;
-    
+   
 }
 .logo{
-  width:65px;
+  width:70px;
   height:20%;
   margin: 5px;
 }
@@ -19,9 +19,22 @@ color: #ffffff;
  overflow-x: hidden;
 }
 
+.homepic{
+margin: 15px;
+position: relative;
+display: inline-flex;
+}
+
+.size {
+  width: 500px ;
+  margin-left: 0%;
+  padding: 15px;
+
+}
+
 .topnav {
 overflow: hidden;
-margin-top: 0px;
+margin-top: -80px;
 margin-right: 20px;
 font-style: italic;
 float:right;
@@ -68,14 +81,16 @@ color: #000000;
 }
 .empForm {
     float: right;
-    border: 2px solid ;
-    width: 25%;
+    border: 2px solid rgb(12, 63, 122);
+    width: 30%;
     height: 290px;
-    margin: 150px;
+    margin-bottom: 100%;
+    margin-right: 5%;
     text-align: center;
     color:black;
     font-size: 20px;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
 }
 
 
