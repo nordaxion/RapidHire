@@ -1,40 +1,56 @@
+@media screen and (max-width: 600px) {
+  .column, .container {
+    width: 100%;
+  }
+}
+
 * {
     box-sizing: border-box !important;
-    transition: ease all 0.5s;
-   
+    transition: ease all 0.5s; 
+     
 }
+
 .logo{
-  width:70px;
+  width:120px;
   height:20%;
   margin: 5px;
+  border-radius: 50%;
 }
 
 body{
 background-image:linear-gradient(to top left, rgb(100, 137, 167),  rgb(12, 63, 122));
 color: #ffffff;
  font-size: 14px;
- font-family: 'Raleway', sans-serif;;
+ font-family: 'Open Sans', sans-serif;
  line-height: 1.80857;
  font-weight: normal;
  overflow-x: hidden;
 }
 
-.homepic{
+.homepic {
 margin: 15px;
 position: relative;
-display: inline-flex;
+display: ;
 }
 
 .size {
-  width: 500px ;
+  width: 250px ;
   margin-left: 0%;
-  padding: 15px;
+  padding: 20px;
+
+}
+
+.size2 {
+  width: 300px ;
+  margin-right: -100%;
+  padding-left: 80px;
+  
 
 }
 
 .topnav {
 overflow: hidden;
-margin-top: -80px;
+margin-top: -120px;
 margin-right: 20px;
 font-style: italic;
 float:right;
@@ -69,30 +85,97 @@ color: #000000;
     align-self: center;
     font-style: italic;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 0%;
+    margin-left: 2%;
     color: white;
-}
-
-.slogan2 {
+    font-size:25px;
     text-align: center;
-  
-    
-
 }
+
+.formtitle {
+  text-align: center;
+  color:white;
+}
+
+
+figcaption {
+  color: white;
+  font-style: italic;
+  font-size: 22 px;
+  padding: 2 px;
+  text-align: center;
+  width: 35%;
+  display: inline-block;
+}
+/* sign up form */
+input[type=text], input[type=password] {
+  width: 80%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
 .empForm {
-    float: right;
-    border: 2px solid rgb(12, 63, 122);
-    width: 30%;
-    height: 290px;
-    margin-bottom: 100%;
-    margin-right: 5%;
-    text-align: center;
-    color:black;
-    font-size: 20px;
-    background-color: rgb(255, 255, 255);
-    opacity: 1;
+  float: right;
+  border: 2px solid rgb(12, 63, 122);
+  margin-right: 10%;
+  width:300px;
+  height: 20%;
+  padding: 1em;
+  color:black;
+  font-size: 20px;
+  background-color: rgb(255, 255, 255);
+  opacity: 1;
+  display: flex;
+}
+.button2 {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 80px;
+  border: none;
+  cursor: pointer;
+  width: 40%;
+  opacity: 0.9;
+  float: right; 
 }
 
+.button2:hover {
+  opacity:1;
+}
+
+
+/* Float cancel and signup buttons and add an equal width */
+.signupbtn {
+  float: right;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container2 {
+  padding: 10px;
+  float: right;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table-column ;
+}
 
 
 /*footer*/
@@ -102,13 +185,12 @@ footer{
    }
    
    .footer-distributed{
-    background-color: #292c2f;
+    background-color: #1c2b3ad8;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
     text-align: center;
     font: bold 16px sans-serif;
-   
     padding: 20px 35px;
     margin-top: 50px;
    }
@@ -226,14 +308,12 @@ footer{
     width: 35px;
     height: 35px;
     cursor: pointer;
-    background-color:  #33383b;
+    background-color: #33383b;
     border-radius: 2px;
-   
     font-size: 20px;
     color: #ffffff;
     text-align: center;
     line-height: 35px;
-   
     margin-right: 3px;
     margin-bottom: 5px;
    }
@@ -243,7 +323,6 @@ footer{
    
     .footer-distributed{
       font: bold 14px sans-serif;
-   
     }
    
     .footer-distributed .footer-left,
@@ -258,9 +337,3 @@ footer{
     .footer-distributed .footer-center i{
       margin-left: 0;
     }
-    .main {
-      line-height: normal;
-      font-size: auto;
-    }
-   
-   }
