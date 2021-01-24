@@ -86,9 +86,11 @@ def register_as_employer():
         except sqlite3.IntegrityError:
             return render_template("error.html", error="Account already exists.", code=400)
 
-        cursor.execute("SELECT user_id FROM users WHERE email=?", (email,))
-        session["user_id"] = cursor.fetchone()
-        session["user_type"] = user_type
+        with sqlite3.connect("employment.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT user_id FROM users WHERE email=?", (email,))
+            session["user_id"] = int(cursor.fetchone()[0])
+            session["user_type"] = user_type
 
         return redirect(url_for("portal"))
 
@@ -155,7 +157,7 @@ def register_as_employee():
         with sqlite3.connect("employment.db") as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT user_id FROM users WHERE email=?", (email,))
-            session["user_id"] = cursor.fetchone()
+            session["user_id"] = int(cursor.fetchone()[0])
             session["user_type"] = user_type
 
             cursor.execute("INSERT INTO profile VALUES (?, ?, ?, ?, ?)", (int(session["user_id"]), location, skills, highest_education, resume))
@@ -290,7 +292,8 @@ def add_postings():
         max_distance = request.form.get("max_distance")
         skills = request.form.get("skills")
         job_description = request.form.get("job_description")
-        user_id = int(session["user_id"])
+        user_id = session["user_id"]
+        print(user_id)
 
         with sqlite3.connect("employment.db") as conn:
             cursor = conn.cursor()

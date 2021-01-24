@@ -9,6 +9,10 @@
   margin: 5px;
 }
 
+p, h3, h4, h5, label {
+  color: white;
+}
+
 body{
 background-image:linear-gradient(to top left, rgb(100, 137, 167),  rgb(12, 63, 122));
 color: #ffffff;

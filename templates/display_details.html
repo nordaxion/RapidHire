@@ -11,12 +11,12 @@ Portal
             {% if match_len != 0 %}
                 {% for match in matches %}
                     <div class=row>
-                        <h5>{{ matches[0]}} {{ matches[1] }}</h5>
-                        <p>{{ matches[2] }} </p>
-                        <p>Email: {{ matches[3] }}</p>
-                        <p>Skills: {{ matches[4] }}</p>
-                        <p>Highest Form of Education: {{ matches[5] }}</p>
-                        <p>Resume: {{ matches [6] }}</p>
+                        <h4>{{ match[0]}} {{ match[1] }}</h5>
+                        <p>{{ match[2] }} </p>
+                        <p>Email: {{ match[3] }}</p>
+                        <p>Skills: {{ match[4] }}</p>
+                        <p>Highest Form of Education: {{ match[5] }}</p>
+                        <p>Resume: {{ match[6] }}</p>
                         <br>
                     </div>
                 {% endfor %}

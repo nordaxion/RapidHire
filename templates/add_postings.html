@@ -7,21 +7,32 @@ Post
 {% block main %}
     <h3>Post a job opening</h3>
     <form action="/add_postings" method="post">
+
+        <label for="job_name" class="form-label">Job Name</label>
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="job_name" placeholder="Job Name" type="text" />
-        </div>
+            <input autocomplete="off" id="job_name" autofocus class="form-control" name="job_name" placeholder="Job Name" type="text" />
+        </div><br>
+
+        <label for="location" class="form-label">Location</label>
         <div class="form-group">
-            <input autocomplete="off" class="form-control" name="location" placeholder="New York, NY 10118" type="text" />
-        </div>
+            <input autocomplete="off" class="form-control" id="location" name="location" placeholder="New York, NY 10118" type="text" />
+        </div><br>
+
+        <label for="job_name" class="form-label">Max Distance</label>
         <div class="form-group">
-            <input autocomplete="off" class="form-control" name="max_distance" placeholder="In Miles" type="number" />
-        </div>
+            <input autocomplete="off" class="form-control" name="max_distance" type="number" />
+        </div><br>
+        
+        <label for="job_name" class="form-label">Job Name</label>
         <div class="form-group">
-            <input autocomplete="off" class="form-control" name="skills" placeholder="Skills" type="text" />
-        </div>
+            <input autocomplete="off" class="form-control" name="skills" placeholder="Python, Circuit Engineering, etc." type="text" />
+        </div><br>
+
+        <label for="job_name" class="form-label">Job Name</label>
         <div class="form-group">
             <textarea autocomplete="off" class="form-control" name="job_description"></textarea>
-        </div>
+        </div><br>
+
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 {% endblock %}
