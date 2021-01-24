@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <title>Rapid Hire</title>
     <link rel="stylesheet" href="style.css">
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
         media="screen">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <script src="script.js"></script>
 </head>
 
@@ -28,92 +29,115 @@
             <a href="application.html">Job Application</a>
             <button>Login</button>
         </div>
-
-        <div class="slogan">
-            <p class="slogan2">Rapid Hire, here small businesses and potential employees connect. <br> We're committed
-                to helping decrease unemployment rates.</p>
-        </div>
-        <div class="homepic">
-            <figure>
-                <img src="job seekers.gif" class="size">
-                <figcaption>160 Million people are looking for job to <br> their experience and make some income.
-                </figcaption>
-            </figure>
-            <img src="computer.gif" class="size">
-            <figcaption>160 Million people are looking for job to <br> their experience and make some income.
-            </figcaption>
-        </div>
-
-        <div class="empForm">
-
-            <p>Your future job is near.<br>
-                Submit your Application today.</p>
-            <form action="/action_page.php">
-                <label for="fname">Name: </label>
-                <input type="text" id="lname" name="lname"><br />
-                <label for="email">Email: </label>
-                <input type="text" id="email" name="email"><br />
-                <label for="pword">Password: </label>
-                <input type="password" id="pword" name="pword" required>
-                <br><br>
-                <input type="submit" value="Sign Up">
-            </form>
-        </div>
-
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-        <!--Footer Section-->
-
-        <footer class="footer-distributed">
-
-            <div class="footer-left" class="footer-center">
-
-                <h3></h3>
-                <!--Footer Nav Bar-->
-                <p class="footer-links">
-                    <a href="#">Profile</a>
-                    ·
-                    <a href="#">Contact</a>
-                    ·
-                    <a href="#">Support</a>
-                    ·
-                    <a href="#">Success Stories</a>
-                    ·
-                    <a href="#">Privacy</a>
-
-                </p>
-                <!--Address Section-->
-                <div>
-                    <i class="fa fa-map-marker"></i>
-                    <p><span>21 Revolution Street</span> New York City, USA</p>
-                </div>
-                <!--Phone Number Section-->
-                <div>
-                    <i class="fa fa-phone"></i>
-                    <p>+1 516-123-4567</p>
-                </div>
-                <!--Email Section-->
-                <div>
-                    <i class="fa fa-envelope"></i>
-                    <p><a href="mailto:support@company.com" style="color:#554616"></a></p>
-                </div>
-
-                <!--Icons section-->
-                <div class="footer-icons">
-
-                    <a href="#"><img src="facebook.png" class="fa fa-facebook"></a>
-                    <a href="#"><img src="twitter.png" class="fa fa-twitter"></a>
-                    <a href="#"><img src="instagram.png" class="fa fa-instagram"></a>
-                    <a href="#"><img src="youtube.png" class="fa fa-youtube"></a>
-                    <a href="#"><img src="pin.png" class="fa fa-pintrest"></a>
-                </div>
-
-                <!--Copyright Section-->
-                <p class="footer-owner">© 2021 All Rights Reserved</p>
-
-
+    </div>
+    <div class="slogan">
+        <p class="slogan2">Rapid Hire, here small businesses and potential employees connect. <br> We're committed
+            to helping decrease unemployment rates.</p>
+    </div>
+    <div style="display:flex;">
+        <div class="row" class="homepic">
+            <div class="col-sm-7">
+                <figure>
+                    <img src="Job Reseach.png" class="size">
+                    <figcaption>160 Million people are looking for job to <br> their experience and make some income.
+                    </figcaption>
+                </figure>
+                <figure>
+                    <img src="computer.gif" class="size">
+                    <figcaption>60% of small business need support from <br>potential job seekers.
+                    </figcaption>
+                </figure>
+                <figure>
+                    <img src="job seekers.gif" class="size">
+                    <figcaption>Matching recruiter with potential job seekers.
+                    </figcaption>
+                </figure>
             </div>
-        </footer>
+        </div>
+        <!--Sign up Form-->
+
+        <form action="/action_page.php" style="border:1px solid #ccc; float: inline-end;">
+            <div class="container2">
+                <h1 class="formtitle">Sign Up</h1>
+                <p class="formtitle">Please fill this form out to create an account.</p>
+                <hr>
+
+                <label for="email"><b>Email:</b></label><br>
+                <input type="text" placeholder="Enter Email" name="email" required>
+                <br>
+                <label for="psw"><b>Password:</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <br>
+                <label for="psw-repeat"><b>Repeat Password:</b></label>
+                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                <br>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">
+                    Remember me
+                </label>
+                <p>By creating an account you agree to our <a href="#" style="color:rgb(219, 19, 19)">Terms &
+                        Privacy</a>.</p>
+                <div class="clearfix">
+                    <button type="submit" class="button2" class="signupbtn">Sign Up</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <!--Footer Section-->
+
+    <footer class="footer-distributed">
+
+        <div class="footer-left" class="footer-center">
+
+            <h3>Rapid Hire</h3>
+            <!--Footer Nav Bar-->
+            <p class="footer-links">
+                <a href="#">Profile</a>
+                ·
+                <a href="contactus.html">Contact</a>
+                ·
+                <a href="#">Support</a>
+                ·
+                <a href="#">Success Stories</a>
+                ·
+                <a href="#">Privacy</a>
+
+            </p>
+            <!--Address Section-->
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>21 Revolution Street</span> New York City, USA</p>
+            </div>
+            <!--Phone Number Section-->
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+1 516-123-4567</p>
+            </div>
+            <!--Email Section-->
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:support@company.com" style="color:#554616"></a></p>
+            </div>
+
+            <!--Icons section-->
+            <div class="footer-icons">
+
+                <a href="#"><img src="facebook.png" class="fa fa-facebook"></a>
+                <a href="#"><img src="twitter.png" class="fa fa-twitter"></a>
+                <a href="#"><img src="instagram.png" class="fa fa-instagram"></a>
+                <a href="#"><img src="youtube.png" class="fa fa-youtube"></a>
+                <a href="#"><img src="pin.png" class="fa fa-pintrest"></a>
+            </div>
+
+            <!--Copyright Section-->
+            <p class="footer-owner">© 2021 All Rights Reserved</p>
+        </div>
+
+
+    </footer>.
+
 </body>
 
 </html>
